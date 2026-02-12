@@ -1,20 +1,35 @@
-# coin_acceptor.py
+from coin_acceptor import CoinAcceptor
 
-class CoinAcceptor:
-    def __init__(self):
-        self.amount = 0      # تعداد سکه‌های وارد شده
-        self._value = 1.0    # ارزش هر سکه (می‌توان ثابت 1 واحد در نظر گرفت)
+def main():
+    print("Program starting.")
+    print("Welcome to coin acceptor program.")
+    print("Insert new coin by typing its value (0 returns the money, -1 exits the program)\n")
 
-    def insertCoin(self) -> None:
-        """یک سکه وارد می‌شود"""
-        self.amount += 1
+    coin_machine = CoinAcceptor()
 
-    def getAmount(self) -> int:
-        """مقدار فعلی سکه‌ها را برمی‌گرداند"""
-        return self.amount
+    while True:
+        try:
+            user_input = input("Insert coin (0 return, -1 exit): ").strip()
+            coin_value = float(user_input)
+        except ValueError:
+            print("Invalid input. Please enter a number.\n")
+            continue
 
-    def returnCoins(self) -> int:
-        """تمام سکه‌ها را برمی‌گرداند و شمارنده را صفر می‌کند"""
-        coins = self.amount
-        self.amount = 0
-        return coins
+        if coin_value == -1:
+            print("\nExiting program.")
+            break
+        elif coin_value == 0:
+            coins, value = coin_machine.returnCoins()
+            print("Returning coins...")
+            print(f"{coins} coin{'s' if coins != 1 else ''} with {value}€ value returned.")
+            print(f"Inserted coins = 0, value = 0€\n")
+        elif coin_value > 0:
+            coin_machine.insert_coin(coin_value)
+        else:
+            print("Invalid coin value. Please insert a positive number, 0, or -1.\n")
+
+    print("\nThank you for using the coin acceptor program.")
+    print("Program ending.")
+
+if __name__ == "__main__":
+    main()
