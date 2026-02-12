@@ -1,21 +1,15 @@
-class FileHandler:
-    def __init__(self, filepath: str):
-        self.filepath = filepath
+class Counter:
+    def __init__(self):
+        self.__count = 0  # initialize count to 0
 
-    def read(self) -> list[str]:
-        with open(self.filepath, "r", encoding="utf-8") as file:
-            rows = file.readlines()
-        return rows
+    def addCount(self) -> None:
+        """Increment the count by 1."""
+        self.__count += 1
 
+    def getCount(self) -> int:
+        """Return the current count."""
+        return self.__count
 
-def main():
-    handler = FileHandler("inventory.csv")
-
-    rows = handler.read()
-
-    for row in rows:
-        print(row.strip())
-
-
-if __name__ == "__main__":
-    main()
+    def zeroCount(self) -> None:
+        """Reset count to 0."""
+        self.__count = 0
